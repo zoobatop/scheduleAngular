@@ -1,9 +1,10 @@
-<div class="po-form">
+<po-page-default>
     <form>
-        <po-dynamic-form
+        <po-dynamic-form #dynamicForm
             [p-fields]="fields"
+            (p-form)="getForm($event)"
         >
         </po-dynamic-form>
-        <po-button p-label="Enter" (p-click)="onClick()"> </po-button>
+        <po-button p-kind="primary" p-label="Enter" (p-click)="onSubmit()"> </po-button>
     </form>
-</div>
+</po-page-default>

@@ -1,24 +1,37 @@
-import { Component } from '@angular/core';
-import { PoDynamicFormField, PoDynamicModule, PoButtonModule } from '@po-ui/ng-components';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { PoModule, PoDynamicFormField, PoDynamicModule, PoButtonModule } from '@po-ui/ng-components';
 import { fieldsLogin } from './models/fields.interface';
+import { AuthService } from './service/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
+    PoModule,
     PoDynamicModule,
-    PoButtonModule
+    PoButtonModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   fields: Array<PoDynamicFormField> = fieldsLogin
   
-  onClick(): void {
-    alert("help")
+  dynamicForm!: NgForm;
+
+  ngOnInit(): void {}
+
+  getForm(form: NgForm){
+    this.dynamicForm = form;
+  }
+
+  async onSubmit() {
+    const { username, password } = this.dynamicForm.value;
+    
+    console.log(this.authService.login(username, password))
   }
 }

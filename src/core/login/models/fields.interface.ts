@@ -1,10 +1,12 @@
 export const fieldsLogin = [
     {
-        label: "User",
+        label: "Email",
         property: "username",
+        type: 'string',
     },
     {
         label: "Password",
         property: "password",
+        type: 'string',
     }
 ]
