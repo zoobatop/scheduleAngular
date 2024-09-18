@@ -1,10 +1,11 @@
 <po-page-default>
     <form>
-        <po-dynamic-form #dynamicForm
+        <po-dynamic-form #loginForm
             [p-fields]="fields"
             (p-form)="getForm($event)"
         >
         </po-dynamic-form>
         <po-button p-kind="primary" p-label="Enter" (p-click)="onSubmit()"> </po-button>
     </form>
+    <po-button p-kind="secondary" p-label="Register here!" (p-click)="headToRegister()"></po-button>
 </po-page-default>

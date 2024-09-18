@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Agenda"
+		},
+		{
+			"path": "../backend-agenda"
+		}
+	],
+	"settings": {}
+}

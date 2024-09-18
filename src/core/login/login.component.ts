@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { PoModule, PoDynamicFormField, PoDynamicModule, PoButtonModule } from '@po-ui/ng-components';
 import { fieldsLogin } from './models/fields.interface';
 import { AuthService } from './service/auth.service';
+import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +17,10 @@ import { AuthService } from './service/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
 export class LoginComponent implements OnInit {
   
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   fields: Array<PoDynamicFormField> = fieldsLogin
   
@@ -32,6 +35,19 @@ export class LoginComponent implements OnInit {
   async onSubmit() {
     const { username, password } = this.dynamicForm.value;
     
-    console.log(this.authService.login(username, password))
-  }
+    try {
+      const response = await firstValueFrom(this.authService.login(username, password));
+      if (response.blocked) {
+        console.log("blocked")
+      } else {
+        this.router.navigate(["/home"]);
+      }
+    } catch (error) {
+      console.error('Login failed', error);
+    }
+  };
+  
+  headToRegister() {
+    this.router.navigate(["/register"]);
+  };
 }
