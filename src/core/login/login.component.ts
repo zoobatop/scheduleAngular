@@ -19,34 +19,44 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent implements OnInit {
-  
-  constructor(private authService: AuthService, private router: Router) {}
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   fields: Array<PoDynamicFormField> = fieldsLogin
-  
+
   dynamicForm!: NgForm;
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  getForm(form: NgForm){
+  getForm(form: NgForm) {
     this.dynamicForm = form;
   }
 
   async onSubmit() {
     const { username, password } = this.dynamicForm.value;
-    
+
     try {
       const response = await firstValueFrom(this.authService.login(username, password));
       if (response.blocked) {
         console.log("blocked")
+        // add some message
       } else {
+        this.saveStorage(response);
         this.router.navigate(["/home"]);
       }
     } catch (error) {
       console.error('Login failed', error);
     }
   };
-  
+
+  private saveStorage(items: any): void {
+    let consultantId: number = items.id;
+    let dataLogin: string    = Date.now().toString()
+
+    localStorage.setItem('consultantId', consultantId.toString())
+    localStorage.setItem('dataLogin'   , dataLogin)
+  }
+
   headToRegister() {
     this.router.navigate(["/register"]);
   };

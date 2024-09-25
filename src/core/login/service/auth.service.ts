@@ -14,11 +14,4 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}/Login`, { email, password });
   }
 
-  // private saveStorage(itens: any): void {
-  //   let consultantId = itens.data.id;
-  //   let dataLogin    = Date.now().toString()
-
-  //   localStorage.setItem('consultantId', consultantId)
-  //   localStorage.setItem('dataLogin',    dataLogin)
-  // }
 }
