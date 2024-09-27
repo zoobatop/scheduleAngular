@@ -4,7 +4,7 @@ import { NavbarComponent } from '../../shared/components/navbar/navbar.component
 import { InfoHeroComponent } from '../../shared/components/info-hero/info-hero.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'home',
   standalone: true,
   imports: [
     NavbarComponent, 

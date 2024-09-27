@@ -3,6 +3,15 @@
     <br>
     <br>
     <app-navbar></app-navbar>
-    <app-info-hero></app-info-hero>
+    <info-hero
+        labelTitle="Agenda"
+        labelValue="Schedule" 
+    >
+    </info-hero>
     <p>schedule works!</p>
+    <default-table
+        [columnsTable]="consultants" 
+        [itemsTable]="events"
+    >
+    </default-table>
 </po-page-default>
