@@ -11,7 +11,16 @@ export class AuthService {
   constructor(private http: HttpClient) { }
   
   public login(email: string, password: string): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/Login`, { email, password });
-  }
+    return this.http.post(`${environment.apiUrl}/Login`, { email, password })
+  };
 
+  logout() {
+    localStorage.removeItem('access_token')
+    // this.router.navigate(['/login'])
+  };
+
+  isAuthenticated() {
+    const token = localStorage.getItem('access_token');
+    // return isTokenExpired;
+  }
 }

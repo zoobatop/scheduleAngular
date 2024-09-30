@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
         console.log("blocked")
         // add some message
       } else {
+        console.log(response);
         this.saveStorage(response);
         this.router.navigate(["/home"]);
       }
