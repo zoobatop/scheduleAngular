@@ -7,6 +7,7 @@ import { ReportComponent } from '../core/report/report.component';
 import { ScheduleComponent } from '../core/schedule/schedule.component';
 import { UserComponent } from '../core/user/user.component';
 import { DashboardComponent } from '../core/dashboard/dashboard.component';
+import { AuthGuardService } from '../core/auth/guard/auth-guard.service';
 
 export const routes: Routes = [
     {
@@ -24,27 +25,33 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [AuthGuardService]
     },
     {
         path: 'customer',
-        component: CustomerComponent
+        component: CustomerComponent,
+        canActivate: [AuthGuardService]
     },
     {
         path: 'report',
-        component: ReportComponent
+        component: ReportComponent,
+        canActivate: [AuthGuardService]
     },
     {
         path: 'schedule',
-        component: ScheduleComponent
+        component: ScheduleComponent,
+        canActivate: [AuthGuardService]
     },
     {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [AuthGuardService]
     },
     {
         path: 'user',
-        component: UserComponent
+        component: UserComponent,
+        canActivate: [AuthGuardService]
     },
     {
         path: '**',

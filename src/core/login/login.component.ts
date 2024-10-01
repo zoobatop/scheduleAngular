@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PoModule, PoDynamicFormField, PoDynamicModule, PoButtonModule } from '@po-ui/ng-components';
 import { fieldsLogin } from './models/fields.interface';
-import { AuthService } from './service/auth.service';
+import { AuthService } from '../auth/service/auth.service';
 import { firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private readonly authService: AuthService, private readonly router: Router) { }
 
   fields: Array<PoDynamicFormField> = fieldsLogin
 
@@ -37,26 +37,16 @@ export class LoginComponent implements OnInit {
 
     try {
       const response = await firstValueFrom(this.authService.login(username, password));
-      if (response.blocked) {
+      if (!response.auth) {
         console.log("blocked")
         // add some message
       } else {
-        console.log(response);
-        this.saveStorage(response);
         this.router.navigate(["/home"]);
       }
     } catch (error) {
       console.error('Login failed', error);
     }
   };
-
-  private saveStorage(items: any): void {
-    let consultantId: number = items.id;
-    let dataLogin: string    = Date.now().toString()
-
-    localStorage.setItem('consultantId', consultantId.toString())
-    localStorage.setItem('dataLogin'   , dataLogin)
-  }
 
   headToRegister() {
     this.router.navigate(["/register"]);
