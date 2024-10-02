@@ -8,5 +8,6 @@ export const fieldsLogin = [
         label: "Password",
         property: "password",
         type: 'string',
+        secret: true
     }
 ]

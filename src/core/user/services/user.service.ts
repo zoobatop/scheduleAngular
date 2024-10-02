@@ -13,17 +13,7 @@ export class UserService {
   ) { }
 
   public getProfile(id: number): Observable<any> {
-    let accessToken = localStorage.getItem('access_token');
-
-    let headers = new HttpHeaders({
-        'Content-Type': 'application/json'
-    });
-
-    if (accessToken !== null) {
-        headers = headers.set('x-access-token', accessToken);
-    }
-
-    return this.http.get(`${environment.apiUrl}/User/Profile/${id}`, { headers });
-}
+    return this.http.get(`${environment.apiUrl}/User/Profile/${id}`);
+  }
 
 }

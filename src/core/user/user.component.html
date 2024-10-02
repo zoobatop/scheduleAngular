@@ -8,5 +8,11 @@
         labelValue="user works!" 
     >
     </info-hero>
-    <po-button p-kind="secondary" p-label="catch profile!" (p-click)="catchProfile()"></po-button>
+    <div *ngIf="userProfile">
+        <p>First Name: {{ userProfile.firstName }}</p>
+        <p>Last Name: {{ userProfile.lastName }}</p>
+        <p>Email: {{ userProfile.email }}</p>
+        <p>Consultant Job: {{ userProfile.consultantJob }}</p>
+        <p>Blocked: {{ userProfile.block ? "true" : "false" }}</p>
+    </div>
 </po-page-list>
