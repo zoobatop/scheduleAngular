@@ -22,6 +22,7 @@ export const SignupFields = [
     {
         label: 'Password',
         property: 'password',
-        type: 'string'
+        type: 'string',
+        secret: true 
     }
 ]

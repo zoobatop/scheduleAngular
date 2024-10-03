@@ -8,6 +8,7 @@ import { ScheduleComponent } from '../core/schedule/schedule.component';
 import { UserComponent } from '../core/user/user.component';
 import { DashboardComponent } from '../core/dashboard/dashboard.component';
 import { AuthGuardService } from '../core/auth/guard/auth-guard.service';
+import { ConfigComponent } from '../core/config/config.component';
 
 export const routes: Routes = [
     {
@@ -51,6 +52,11 @@ export const routes: Routes = [
     {
         path: 'user',
         component: UserComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: 'config',
+        component: ConfigComponent,
         canActivate: [AuthGuardService]
     },
     {

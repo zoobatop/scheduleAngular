@@ -19,6 +19,4 @@ export class InfoHeroComponent {
     required: true
   }) labelValue: string = ''
 
-  NgOnInit() {}
-
 }

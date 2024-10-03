@@ -22,7 +22,10 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
 
-  constructor(private readonly authService: AuthService, private readonly router: Router) { }
+  constructor(
+    private readonly authService: AuthService, 
+    private readonly router: Router
+  ) { }
 
   fields: Array<PoDynamicFormField> = fieldsLogin
 

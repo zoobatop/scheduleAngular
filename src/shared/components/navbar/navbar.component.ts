@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PoModule } from '@po-ui/ng-components';
-import { PoNavbarModule, PoNavbarItem } from '@po-ui/ng-components';
+import { PoNavbarModule, PoNavbarItem, PoNavbarIconAction } from '@po-ui/ng-components';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +14,13 @@ import { PoNavbarModule, PoNavbarItem } from '@po-ui/ng-components';
 })
 
 export class NavbarComponent {
+  navbarAction: Array<PoNavbarIconAction> = [
+    {
+      label: "Config",
+      icon: 'ph ph-gear-six',
+      link: '/config'
+    }
+  ]
 
   navbarItem: Array<PoNavbarItem> = [
     {

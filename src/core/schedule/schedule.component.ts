@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PoPageModule } from '@po-ui/ng-components';
+import { PoPageModule, PoButtonModule } from '@po-ui/ng-components';
 import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { InfoHeroComponent } from '../../shared/components/info-hero/info-hero.component';
 import { TableComponent } from '../../shared/components/table/table.component';
