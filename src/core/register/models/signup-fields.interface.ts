@@ -1,22 +1,53 @@
-export const SignupFields = [
+import { PoDynamicFormField, PoSelectOption } from '@po-ui/ng-components';
+
+const jobOptions: Array<PoSelectOption> = [
+    {
+        label: "MAT",
+        value: "MAT"
+    },
+    {
+        label: "FSW",
+        value: "FSW"
+    },
+    {
+        label: "ADM",
+        value: "ADM"
+    },
+    {
+        label: "IS",
+        value: "IS"
+    },
+    {
+        label: "Admin",
+        value: "admin"
+    },
+    {
+        label: "BI",
+        value: "BI"
+    }
+]
+
+export const SignupFields: Array<PoDynamicFormField> = [
     {
         label: 'First Name',
-        property: 'First_Name',
+        property: 'firstName',
         type: 'string'
     },
     {
         label: 'Last Name',
-        property: 'Last_Name',
+        property: 'lastName',
         type: 'string'
     },
     {
         label: 'Consultant Job',
-        property: 'Consultant_Job',
-        type: 'string'
+        property: 'consultantJob',
+        type: 'string',
+        options: jobOptions,
+        optionsMulti: false
     },
     {
         label: 'Email',
-        property: 'Email',
+        property: 'email',
         type: 'string'
     },
     {

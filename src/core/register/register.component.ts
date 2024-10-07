@@ -21,7 +21,6 @@ export class RegisterComponent {
 
   constructor(private router: Router, private signUpService: SignupService) {}
 
-  typeOfMethod: number = 2; // method of register
   fields: Array<PoDynamicFormField> = SignupFields;
   dynamicForm!: NgForm;
 
@@ -35,7 +34,7 @@ export class RegisterComponent {
 
   async onSubmit() {
     try {
-      const response = firstValueFrom(this.signUpService.signUp(this.dynamicForm.value, this.typeOfMethod));
+      const response = firstValueFrom(this.signUpService.signUp(this.dynamicForm.value));
       console.log(response);
     } catch(error) {
       console.error('register failed', error);
