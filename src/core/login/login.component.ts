@@ -42,18 +42,23 @@ export class LoginComponent implements OnInit {
 
     try {
       const response = await firstValueFrom(this.authService.login(username, password));
-      if (!response.auth) {
-        console.log("blocked")
-        // add some message
+      
+      if (response.auth) {
+        this.headToHome();
       } else {
-        this.router.navigate(["/home"]);
+        console.error('Login failed: invalid credentials');
       }
     } catch (error) {
       console.error('Login failed', error);
     }
-  };
+  }
 
   headToRegister() {
     this.router.navigate(["/register"]);
   };
+
+  private headToHome() {
+    this.router.navigate(["/home"]);
+  };
+
 }

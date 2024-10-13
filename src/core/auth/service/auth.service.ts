@@ -4,6 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../../../../env/environment';
 import { LoginResponse } from '../../login/models/loginResponse.interface';
 import { Observable, tap } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,43 +14,38 @@ export class AuthService {
   public jwtHelper: JwtHelperService = new JwtHelperService();
   
   constructor(
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
+    private readonly cookieService: CookieService
   ) { }
   
   public login(email: string, password: string): Observable<any> {
     return this.http.post<LoginResponse>(`${environment.apiUrl}/Login`, { email, password })
-    .pipe(
-      tap(res => {
-        if (res.auth) {
-          this.saveStorage(res)
-        }
-    }))
-  };
-
-  saveStorage(response: any): void {
-    const auth: string = response.auth ? "true" : "false"
-    
-    localStorage.setItem('auth', auth);
-    localStorage.setItem('id', response.id.toString());
-    localStorage.setItem('access_token', response.access_token);
-    localStorage.setItem('refresh_token', response.refresh_token);
+      .pipe(
+        tap(res => {
+          if (res.auth) {
+            this.saveCookies(res);
+          }
+        }),
+        // se não for verdadeiro
+      );
   }
 
-  logout(): boolean {
-    localStorage.removeItem('auth');
-    localStorage.removeItem('id');
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    return true;
-  };
+  saveCookies(response: any): void {
+    this.cookieService.set('access_token', response.access_token, { secure: true, sameSite: 'Strict' });
+    this.cookieService.set('refresh_token', response.refresh_token, { secure: true, sameSite: 'Strict' });
+  }
 
-  isAuthenticated() {
-    const token = localStorage.getItem('access_token');
+  logout(): void {
+    this.cookieService.delete('access_token');
+    this.cookieService.delete('refresh_token');
+  }
+
+  isAuthenticated(): boolean {
+    const token = this.cookieService.get('access_token');
     return !this.jwtHelper.isTokenExpired(token);
-  };
+  }
 
   getAuthToken(): string | null {
-    return localStorage.getItem('access_token')
-  };
-  
+    return this.cookieService.get('access_token');
+  }
 }

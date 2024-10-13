@@ -15,7 +15,7 @@ import { firstValueFrom } from 'rxjs';
     PoButtonModule
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
 
@@ -23,6 +23,7 @@ export class RegisterComponent {
 
   fields: Array<PoDynamicFormField> = SignupFields;
   dynamicForm!: NgForm;
+  responseMessage: string = '';
 
   getForm(form: NgForm){
     this.dynamicForm = form;
@@ -34,11 +35,14 @@ export class RegisterComponent {
 
   async onSubmit() {
     try {
-      const response = firstValueFrom(this.signUpService.signUp(this.dynamicForm.value));
-      console.log(response);
+      const response = await firstValueFrom(this.signUpService.signUp(this.dynamicForm.value));
+      this.responseMessage = response.message || 'Registration successful!';
+      alert(this.responseMessage);
+      this.headToLogin();
     } catch(error) {
       console.error('register failed', error);
+      this.responseMessage = 'Registration failed. Please try again.';
+      alert(this.responseMessage);
     }
   };
-
 }
