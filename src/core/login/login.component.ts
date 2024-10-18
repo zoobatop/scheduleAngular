@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       const response = await firstValueFrom(this.authService.login(username, password));
       
       if (response.auth) {
+        // todo: notification 
         this.headToHome();
       } else {
         console.error('Login failed: invalid credentials');

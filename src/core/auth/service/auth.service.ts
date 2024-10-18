@@ -20,32 +20,18 @@ export class AuthService {
   
   public login(email: string, password: string): Observable<any> {
     return this.http.post<LoginResponse>(`${environment.apiUrl}/Login`, { email, password })
-      .pipe(
-        tap(res => {
-          if (res.auth) {
-            this.saveCookies(res);
-          }
-        }),
-        // se não for verdadeiro
-      );
   }
 
-  saveCookies(response: any): void {
-    this.cookieService.set('access_token', response.access_token, { secure: true, sameSite: 'Strict' });
-    this.cookieService.set('refresh_token', response.refresh_token, { secure: true, sameSite: 'Strict' });
-  }
-
-  logout(): void {
-    this.cookieService.delete('access_token');
-    this.cookieService.delete('refresh_token');
-  }
+  logout(): void {}
 
   isAuthenticated(): boolean {
-    const token = this.cookieService.get('access_token');
-    return !this.jwtHelper.isTokenExpired(token);
+    // const token = this.cookieService.get('access_token');
+    // return !this.jwtHelper.isTokenExpired(token);
+    return true
   }
 
   getAuthToken(): string | null {
-    return this.cookieService.get('access_token');
+    // return this.cookieService.get('access_token');
+    return "socorro";
   }
 }

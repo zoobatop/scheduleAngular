@@ -1,7 +1,7 @@
 export interface registerForm {
-    First_Name: string,
-    Last_Name: string,
-    Consultant_Job: string,
-    Email: string,
+    firstName: string,
+    lastName: string,
+    consultantJob: string,
+    email: string,
     password: string
 }

@@ -37,7 +37,7 @@ export class RegisterComponent {
     try {
       const response = await firstValueFrom(this.signUpService.signUp(this.dynamicForm.value));
       this.responseMessage = response.message || 'Registration successful!';
-      alert(this.responseMessage);
+      alert(this.responseMessage); // todo: notification service
       this.headToLogin();
     } catch(error) {
       console.error('register failed', error);
