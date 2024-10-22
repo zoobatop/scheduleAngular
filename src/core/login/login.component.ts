@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     try {
       const response = await firstValueFrom(this.authService.login(username, password));
       
-      if (response.auth) {
+      if (response.body.auth) {
         // todo: notification 
         this.headToHome();
       } else {

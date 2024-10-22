@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../../../../env/environment';
 import { LoginResponse } from '../../login/models/loginResponse.interface';
@@ -19,19 +19,20 @@ export class AuthService {
   ) { }
   
   public login(email: string, password: string): Observable<any> {
-    return this.http.post<LoginResponse>(`${environment.apiUrl}/Login`, { email, password })
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/Login`, { email, password }, { observe: 'response', withCredentials: true});
   }
 
-  logout(): void {}
+  logout(): void {
+    this.cookieService.delete('accessToken');
+    this.cookieService.delete('refreshToken');
+  }
 
   isAuthenticated(): boolean {
-    // const token = this.cookieService.get('access_token');
-    // return !this.jwtHelper.isTokenExpired(token);
-    return true
+    const token = this.cookieService.get('accessToken');
+    return !this.jwtHelper.isTokenExpired(token);
   }
 
   getAuthToken(): string | null {
-    // return this.cookieService.get('access_token');
-    return "socorro";
+    return this.cookieService.get('accessToken');
   }
 }
